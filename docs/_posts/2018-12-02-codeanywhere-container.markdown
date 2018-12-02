@@ -34,6 +34,8 @@ Codeanywhere にログインし、[エディタ](https://codeanywhere.com/editor
 
 ![terminal]({{ site.url }}{{ site.baseurl }}/images/codeanywhere-terminal.png)
 
+Windows 端末上でこの SSH Terminal に値をペーストするときは、 [shift] + [insert] キーを、逆にコピーする時は [control] + [insert] キーを押してください。
+
 #4. コンテナを削除する
 
 コンテナのメニューから Destroy を選択すると、コンテナを削除することができます。Codeanywhere の無料プランでは同時に 1 つのコンテナしか使うことができないため、別の作業をするときや、現在の状態が分からなくなった時はコンテナを削除してください。現在幾つのコンテナが起動しているかは、 右上のアバターをクリックして表示されるダッシュボードメニューから確認することができます。
