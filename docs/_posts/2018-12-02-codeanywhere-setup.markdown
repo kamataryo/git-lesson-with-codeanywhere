@@ -1,31 +1,26 @@
 ---
 layout: post
-title: 'GitHubのセットアップ'
-date: 2018-12-02 17:44:12 +0900
-categories: github
+title: 'CodeAnywhereのセットアップ'
+date: 2018-12-02 18:00:00 +0900
+categories: codeanywhere
 ---
 
-[GitHub](https://github.com) は Git のリモートリポジトリサービスです。この授業では、GitHub を用いて演習や課題の提出を行います。
+[Codeanywhere](https://codeanywhere.com) はクラウド型の IDE(統合開発環境)です。 ウェブ開発などに使うことができる開発環境をブラウ上で利用することができます。Codeanywhere を使うことで、煩雑な開発環境のセットアップの手順を省略することができます。
 
-# 1. GitHub へのユーザー登録
+# 1. GitHub のアカウントを使って Codeanywhere のユーザー登録を行う
 
-[https://github.com/join](https://github.com/join) にアクセスして必要事項を入力します。また、[利用規約](https://help.github.com/articles/github-terms-of-service/)や[プライバシーポリシー](https://help.github.com/articles/github-privacy-statement/)をよく読んでおきます。同意できる場合についてのみ、[Create an account] のボタンを押して次のステップに進んでください。
+ソーシャルログインという仕組みを使って、 GitHub のアカウントを用いて Codeanywhere のユーザー登録を行うことができます。[サインアップページ](https://codeanywhere.com/signup)にアクセスして、 `Sign up with GitHub` というボタンを押して登録を開始してください。
 
-パスワードを登録する際は、別のウェブサービスとの使い回しを避け、なるべく強固なパスワードを用いるようにしてください。
-例: 英数字記号を混在させ、10 文字以上の長さにするなど
+![signup]({{ site.url }}{{ site.baseurl }}/images/codeanywhere-signup.png)
 
-![create your account]({{ site.url }}/images/github-create-your-account.png)
+Codeanywhere から GitHub へのアクセス（メールアドレスの取得など）して良いか確認されますので、問題ないと判断できるのであれば、処理を継続してください。
 
-# 2. GitHub に登録したメールアドレスを検証する
+# 2. GitHub から Codeanywhere に登録したメールアドレスを検証する
 
-アカウントを作成すると、登録したメールアドレスが本当にあなたのものなのかを確認するために、GitHub からメールが送られてきます。メールに記載されたリンクをクリックして、メールアドレスの確認を完了してください。
+サインアップが完了すると、Codeanywhere からあなたのメールアドレスを確認するためのメールが送られます。メールに記載された URL をクリックして処理を完了してください。
 
-# 3. GitHub にログインできることを確認する
+# 3. Codeanywhere からメールが送られない場合
 
-GitHub のログイン画面([https://github.com/login](https://github.com/login)) にアクセスし、必要事項を入力してください。メールアドレス、またはあなたのユーザー名を使うことができます。
+以下の PDF の手順に沿って確認を行ってください。
 
-![login]({{ site.url }}/images/github-signin.png)
-
-ログインに成功すると、あなたのダッシュボードが表示されます。この画面から GitHub の各種の操作を行うことができます。
-
-![dashboard]({{ site.url }}/images/github-dashboard.png)
+[Codeanywhere でメールアドレスの確認をする]({{ site.url }}{{ site.baseurl }}/images/codeanywhere-confirm-email.pdf)

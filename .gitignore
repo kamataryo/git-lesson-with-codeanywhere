@@ -54,3 +54,4 @@ build-iPhoneSimulator/
 /vendor
 .sass-cache
 _site
+node_modules
