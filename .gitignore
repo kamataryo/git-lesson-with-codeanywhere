@@ -55,3 +55,6 @@ build-iPhoneSimulator/
 .sass-cache
 _site
 node_modules
+
+.travis_rsa
+.travis_rsa.pub
