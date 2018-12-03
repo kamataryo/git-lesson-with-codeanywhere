@@ -3,6 +3,7 @@ layout: post
 title: 'GitHubのセットアップ'
 date: 2018-12-02 17:44:12 +0900
 categories: github
+author: kamataryo
 ---
 
 [GitHub](https://github.com) は Git のリモートリポジトリサービスです。この授業では、GitHub を用いて演習や課題の提出を行います。

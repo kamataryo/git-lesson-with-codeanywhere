@@ -3,6 +3,7 @@ layout: post
 title: 'CodeAnywhereの開発環境とGitHubのリポジトリを連携する'
 date: 2018-12-02 19:30:00 +0900
 categories: codeanywhere
+author: kamataryo
 ---
 
 # 1. GitHub でリポジトリを作成する

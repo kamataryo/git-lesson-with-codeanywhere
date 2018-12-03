@@ -3,6 +3,7 @@ layout: post
 title: 'CodeAnywhereのセットアップ'
 date: 2018-12-02 18:00:00 +0900
 categories: codeanywhere
+author: kamataryo
 ---
 
 [Codeanywhere](https://codeanywhere.com) はクラウド型の IDE(統合開発環境)です。 ウェブ開発などに使うことができる開発環境をブラウ上で利用することができます。Codeanywhere を使うことで、煩雑な開発環境のセットアップの手順を省略することができます。
