@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/kamataryo/git-lesson-with-codeanywhere.svg?branch=master)](https://travis-ci.org/kamataryo/git-lesson-with-codeanywhere)
 
+[Visit Site](https://kamataryo.github.io/git-lesson-with-codeanywhere/)
+
 ## development
 
 ```shell
