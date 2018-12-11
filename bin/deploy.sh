@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $CI == 'true' && $TRAVIS_BRANCH != 'master' ]]; then
+  echo 'not running deploy on CI environment and only with `master` branch.'
+  exit 0
+fi
+
 bundle exec rake build
 cd _site
 git init
