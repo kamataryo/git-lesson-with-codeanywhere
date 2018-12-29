@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="/git-lesson-with-codeanywhere/feed.xml" rel="self" type="application/atom+xml" /><link href="/git-lesson-with-codeanywhere/" rel="alternate" type="text/html" /><updated>2018-12-29T17:18:34+09:00</updated><id>/git-lesson-with-codeanywhere/feed.xml</id><title type="html">Codeanywhere を使って Git と GitHub の操作を習得する</title><subtitle>これはLD2授業のレジュメです。</subtitle><entry><title type="html">Git でコミットを作成する</title><link href="/git-lesson-with-codeanywhere/git/2018/12/11/commit-with-git.html" rel="alternate" type="text/html" title="Git でコミットを作成する" /><published>2018-12-11T14:00:00+09:00</published><updated>2018-12-11T14:00:00+09:00</updated><id>/git-lesson-with-codeanywhere/git/2018/12/11/commit-with-git</id><content type="html" xml:base="/git-lesson-with-codeanywhere/git/2018/12/11/commit-with-git.html">&lt;p&gt;Git を使ってコミットを作成し、GitHub にプッシュする手順を説明します。
+Codeanywhere のコンテナがセットアップされていること、GitHub にリポジトリが作成されて remote が登録されていることを確認してください。GitHub に作成したリポジトリが Codeanywhere 上で remote が登録されているかどうかは、SSH Terminal を開いて&lt;code class=&quot;highlighter-rouge&quot;&gt;workspace&lt;/code&gt;というディレクトリで以下のコマンドを打つことで確認できます。&lt;/p&gt;
+
+&lt;p&gt;登録されていないとき:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+fatal: not a git repository &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;or any of the parent directories&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: .git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;登録されているとき:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+origin	git@github.com:username/reponame.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fetch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+origin	git@github.com:username/reponame.git &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;push&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;1-プロジェクトを編集する&quot;&gt;1. プロジェクトを編集する&lt;/h1&gt;
+
+&lt;p&gt;Codeanywhere のエディタ機能を使って、ファイルやフォルダを作成しプロジェクトを進めください。&lt;/p&gt;
+
+&lt;h1 id=&quot;2-コミットを作成する&quot;&gt;2. コミットを作成する&lt;/h1&gt;
+
+&lt;p&gt;プロジェクトがコミット可能な状態（編集の区切りがついた状態）になったら、 Git のコマンドを SSH Terminal を開いて入力しコミットを作成します。&lt;/p&gt;
+
+&lt;h2 id=&quot;編集内容をステージする&quot;&gt;編集内容をステージする&lt;/h2&gt;
+
+&lt;p&gt;コミットに先立って、編集したファイルをステージします。ステージしたもののみがコミットされます。全てのファイルをステージするには、 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; (ドット、カレントディレクトリの全てのファイルを選択する意味)を使って以下のコマンドを入力してください。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;特定のファイルのみをステージする場合は以下のように指定します。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add file.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;編集内容をコミットする&quot;&gt;編集内容をコミットする&lt;/h2&gt;
+
+&lt;p&gt;コミットに含めたい全てのファイルがステージされていることを確認します。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status
+Changes to be committed:
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git reset HEAD &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to unstage&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+	new file:   file.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上記の例は、&lt;code class=&quot;highlighter-rouge&quot;&gt;file.txt&lt;/code&gt; という名前のファイルを作成してそれをステージに乗せた状態です。このファイルをコミットして良い場合は、以下のコマンドでコミットを作成してください。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;コミットメッセージ&amp;gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;コミットメッセージ&amp;gt;&lt;/code&gt; の部分には、この変更がどのような変更なのか、なんのための変更なのかを簡潔に説明する文章を入力してください。&lt;/p&gt;
+
+&lt;p&gt;なお、 &lt;code class=&quot;highlighter-rouge&quot;&gt;-m&lt;/code&gt; オプションを省略すると vim エディタでコミットメッセージを入力することができます。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;作成したコミットを-github-にプッシュする&quot;&gt;作成したコミットを GitHub にプッシュする&lt;/h2&gt;
+
+&lt;p&gt;作成したコミットは以下のコマンドで GitHub にプッシュすることができます。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;origin&lt;/code&gt; は 作成した GitHub のリポジトリを指す名前です。 &lt;code class=&quot;highlighter-rouge&quot;&gt;git remote -v&lt;/code&gt; コマンドの表示でも、 origin として表示されていますね。&lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; は現在あなたが作業しているブランチです。したがって、このコマンドは、 &lt;code class=&quot;highlighter-rouge&quot;&gt;origin&lt;/code&gt; に &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; ブランチをプッシュするという意味になります。&lt;/p&gt;</content><author><name>kamataryo</name></author><summary type="html">Git を使ってコミットを作成し、GitHub にプッシュする手順を説明します。 Codeanywhere のコンテナがセットアップされていること、GitHub にリポジトリが作成されて remote が登録されていることを確認してください。GitHub に作成したリポジトリが Codeanywhere 上で remote が登録されているかどうかは、SSH Terminal を開いてworkspaceというディレクトリで以下のコマンドを打つことで確認できます。</summary></entry><entry><title type="html">CodeAnywhereの開発環境とGitHubのリポジトリを連携する</title><link href="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-github.html" rel="alternate" type="text/html" title="CodeAnywhereの開発環境とGitHubのリポジトリを連携する" /><published>2018-12-02T19:30:00+09:00</published><updated>2018-12-02T19:30:00+09:00</updated><id>/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-github</id><content type="html" xml:base="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-github.html">&lt;h1 id=&quot;1-github-でリポジトリを作成する&quot;&gt;1. GitHub でリポジトリを作成する&lt;/h1&gt;
+
+&lt;p&gt;GitHub にログインしてリポジトリを作成します。右上の + アイコンから [New Repository] を選択し、&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-new-repo.png&quot; alt=&quot;new repository&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;リポジトリの名前などを決めて [Create Repository] のボタンを押します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-create-repo.png&quot; alt=&quot;crate repository&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以下が新しいリポジトリを作った状態です。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-created-repo.png&quot; alt=&quot;crated repository&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;中断に GitHub との連携をセットアップするコマンドがありますので、これをコピーしておいてください。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#コマンドの例&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# my-repo&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; README.md
+git init
+git add README.md
+git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;first commit&quot;&lt;/span&gt;
+git remote add origin git@github.com:kamataryo/my-repo.git
+git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;2-codeanywhere-で-git-を使うための設定を行う&quot;&gt;2. Codeanywhere で Git を使うための設定を行う&lt;/h1&gt;
+
+&lt;p&gt;以下のコマンドを実行してください。以下は、メールアドレスを GitHub のものに置き換えるコマンドです。&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;username&amp;gt;&lt;/code&gt;はあなたの GitHub ユーザー名に置き換えてください。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.umail &lt;span class=&quot;s1&quot;&gt;'&amp;lt;username&amp;gt;@users.noreply.github.com'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;3-codeanywhere-でコマンドを実行する&quot;&gt;3. Codeanywhere でコマンドを実行する&lt;/h1&gt;
+
+&lt;p&gt;Codeanyehere から SSH Terminal を開き、上記のコマンドをペースト（Windows の場合は [shift] + [insert] キー）して実行してください。GitHub にコミットが送られます。&lt;/p&gt;
+
+&lt;h1 id=&quot;4-git-のコミットを作成して-github-にコミットをプッシュする&quot;&gt;4. Git のコミットを作成して GitHub にコミットをプッシュする&lt;/h1&gt;
+
+&lt;p&gt;Codeanywhere 上で何らかの編集作業を行ってください。（例: TODOs.txt というファイルを作成して TODO リストを作成する）
+そのあとで、以下のコマンドを実行してコミットを GitHub にプッシュし、変更が反映されていることを GitHub のダッシュボードから確認してください。&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;コミットメッセージ&amp;gt;&lt;/code&gt; はあなたが行った作業を説明する文章に置き換えてください。（例: &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m&quot;今日の分のTODOリストを追加&quot;&lt;/code&gt;）&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;コミットメッセージ&amp;gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>kamataryo</name></author><summary type="html">1. GitHub でリポジトリを作成する</summary></entry><entry><title type="html">CodeAnywhereで開発環境を作って、作業して、壊す</title><link href="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-container.html" rel="alternate" type="text/html" title="CodeAnywhereで開発環境を作って、作業して、壊す" /><published>2018-12-02T19:00:00+09:00</published><updated>2018-12-02T19:00:00+09:00</updated><id>/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-container</id><content type="html" xml:base="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-container.html">&lt;h1 id=&quot;1-codeanywhere-で開発環境containerを作成する&quot;&gt;1. Codeanywhere で開発環境（container）を作成する&lt;/h1&gt;
+
+&lt;p&gt;Codeanywhere にログインし、&lt;a href=&quot;https://codeanywhere.com/editor/&quot;&gt;エディタ&lt;/a&gt;に移動します。
+[File] -&amp;gt; [New Connection] -&amp;gt; [Container] を選択します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-new-connection.png&quot; alt=&quot;new connection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt; の項目にはわかりやすい名前をつけ、 &lt;code class=&quot;highlighter-rouge&quot;&gt;stack&lt;/code&gt; は &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; などで検索して見つけることができる &lt;code class=&quot;highlighter-rouge&quot;&gt;Ubuntu 16.04&lt;/code&gt; というものを選択してください。スタックとは、様々な開発用途に適した開発環境の構成をさしており、例えば html のスタックから作成した Container には web 開発に便利な機能が搭載されています。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-select-stack.png&quot; alt=&quot;select stack&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;[create] のボタンを押すと Container の作成が始まります。しばらく待つと、開発環境を使い始めることができます。&lt;/p&gt;
+
+&lt;h1 id=&quot;2-container-上でファイルやフォルダを作成する&quot;&gt;2. Container 上でファイルやフォルダを作成する&lt;/h1&gt;
+
+&lt;p&gt;コンテナの名前の上で右クリックすると、様々なメニューが現れます。[Create File] や [Create Folder] を選択すると、ファイルやフォルダを作成することができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-container-menu.png&quot; alt=&quot;container menu&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ファイルは右のテキスト編集エリアで内容を編集することができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-edit-file.png&quot; alt=&quot;edit&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;3-ssh-terminal-でコマンドを入力する&quot;&gt;3. SSH Terminal でコマンドを入力する&lt;/h1&gt;
+
+&lt;p&gt;コンテナメニューから [SSH Terminal] を選択すると、ターミナルを使うことができます。ターミナルでは、コマンドを入力することでファイルや Git の操作などをすることができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-terminal.png&quot; alt=&quot;terminal&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Windows 端末上でこの SSH Terminal に値をペーストするときは、 [shift] + [insert] キーを、逆にコピーする時は [control] + [insert] キーを押してください。&lt;/p&gt;
+
+&lt;p&gt;#4. コンテナを削除する&lt;/p&gt;
+
+&lt;p&gt;コンテナのメニューから Destroy を選択すると、コンテナを削除することができます。Codeanywhere の無料プランでは同時に 1 つのコンテナしか使うことができないため、別の作業をするときや、現在の状態が分からなくなった時はコンテナを削除してください。現在幾つのコンテナが起動しているかは、 右上のアバターをクリックして表示されるダッシュボードメニューから確認することができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-dashboard.png&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;</content><author><name>kamataryo</name></author><summary type="html">1. Codeanywhere で開発環境（container）を作成する</summary></entry><entry><title type="html">CodeAnywhereのセットアップ</title><link href="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-setup.html" rel="alternate" type="text/html" title="CodeAnywhereのセットアップ" /><published>2018-12-02T18:00:00+09:00</published><updated>2018-12-02T18:00:00+09:00</updated><id>/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-setup</id><content type="html" xml:base="/git-lesson-with-codeanywhere/codeanywhere/2018/12/02/codeanywhere-setup.html">&lt;p&gt;&lt;a href=&quot;https://codeanywhere.com&quot;&gt;Codeanywhere&lt;/a&gt; はクラウド型の IDE(統合開発環境)です。 ウェブ開発などに使うことができる開発環境をブラウ上で利用することができます。Codeanywhere を使うことで、煩雑な開発環境のセットアップの手順を省略することができます。&lt;/p&gt;
+
+&lt;h1 id=&quot;1-github-のアカウントを使って-codeanywhere-のユーザー登録を行う&quot;&gt;1. GitHub のアカウントを使って Codeanywhere のユーザー登録を行う&lt;/h1&gt;
+
+&lt;p&gt;ソーシャルログインという仕組みを使って、 GitHub のアカウントを用いて Codeanywhere のユーザー登録を行うことができます。&lt;a href=&quot;https://codeanywhere.com/signup&quot;&gt;サインアップページ&lt;/a&gt;にアクセスして、 &lt;code class=&quot;highlighter-rouge&quot;&gt;Sign up with GitHub&lt;/code&gt; というボタンを押して登録を開始してください。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-signup.png&quot; alt=&quot;signup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Codeanywhere から GitHub へのアクセス（メールアドレスの取得など）して良いか確認されますので、問題ないと判断できるのであれば、処理を継続してください。&lt;/p&gt;
+
+&lt;h1 id=&quot;2-github-から-codeanywhere-に登録したメールアドレスを検証する&quot;&gt;2. GitHub から Codeanywhere に登録したメールアドレスを検証する&lt;/h1&gt;
+
+&lt;p&gt;サインアップが完了すると、Codeanywhere からあなたのメールアドレスを確認するためのメールが送られます。メールに記載された URL をクリックして処理を完了してください。&lt;/p&gt;
+
+&lt;h1 id=&quot;3-codeanywhere-からメールが送られない場合&quot;&gt;3. Codeanywhere からメールが送られない場合&lt;/h1&gt;
+
+&lt;p&gt;以下の PDF の手順に沿って確認を行ってください。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/git-lesson-with-codeanywhere/images/codeanywhere-confirm-email.pdf&quot;&gt;Codeanywhere でメールアドレスの確認をする&lt;/a&gt;&lt;/p&gt;</content><author><name>kamataryo</name></author><summary type="html">Codeanywhere はクラウド型の IDE(統合開発環境)です。 ウェブ開発などに使うことができる開発環境をブラウ上で利用することができます。Codeanywhere を使うことで、煩雑な開発環境のセットアップの手順を省略することができます。</summary></entry><entry><title type="html">GitHubのセットアップ</title><link href="/git-lesson-with-codeanywhere/github/2018/12/02/github-setup.html" rel="alternate" type="text/html" title="GitHubのセットアップ" /><published>2018-12-02T17:44:12+09:00</published><updated>2018-12-02T17:44:12+09:00</updated><id>/git-lesson-with-codeanywhere/github/2018/12/02/github-setup</id><content type="html" xml:base="/git-lesson-with-codeanywhere/github/2018/12/02/github-setup.html">&lt;p&gt;&lt;a href=&quot;https://github.com&quot;&gt;GitHub&lt;/a&gt; は Git のリモートリポジトリサービスです。この授業では、GitHub を用いて演習や課題の提出を行います。&lt;/p&gt;
+
+&lt;h1 id=&quot;1-github-へのユーザー登録&quot;&gt;1. GitHub へのユーザー登録&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/join&quot;&gt;https://github.com/join&lt;/a&gt; にアクセスして必要事項を入力します。また、&lt;a href=&quot;https://help.github.com/articles/github-terms-of-service/&quot;&gt;利用規約&lt;/a&gt;や&lt;a href=&quot;https://help.github.com/articles/github-privacy-statement/&quot;&gt;プライバシーポリシー&lt;/a&gt;をよく読んでおきます。同意できる場合についてのみ、[Create an account] のボタンを押して次のステップに進んでください。&lt;/p&gt;
+
+&lt;p&gt;パスワードを登録する際は、別のウェブサービスとの使い回しを避け、なるべく強固なパスワードを用いるようにしてください。
+例: 英数字記号を混在させ、10 文字以上の長さにするなど&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-create-your-account.png&quot; alt=&quot;create your account&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2-github-に登録したメールアドレスを検証する&quot;&gt;2. GitHub に登録したメールアドレスを検証する&lt;/h1&gt;
+
+&lt;p&gt;アカウントを作成すると、登録したメールアドレスが本当にあなたのものなのかを確認するために、GitHub からメールが送られてきます。メールに記載されたリンクをクリックして、メールアドレスの確認を完了してください。&lt;/p&gt;
+
+&lt;h1 id=&quot;3-github-にログインできることを確認する&quot;&gt;3. GitHub にログインできることを確認する&lt;/h1&gt;
+
+&lt;p&gt;GitHub のログイン画面(&lt;a href=&quot;https://github.com/login&quot;&gt;https://github.com/login&lt;/a&gt;) にアクセスし、必要事項を入力してください。メールアドレス、またはあなたのユーザー名を使うことができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-signin.png&quot; alt=&quot;login&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ログインに成功すると、あなたのダッシュボードが表示されます。この画面から GitHub の各種の操作を行うことができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/git-lesson-with-codeanywhere/images/github-dashboard.png&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;</content><author><name>kamataryo</name></author><summary type="html">GitHub は Git のリモートリポジトリサービスです。この授業では、GitHub を用いて演習や課題の提出を行います。</summary></entry></feed>
